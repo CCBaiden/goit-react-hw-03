@@ -7,7 +7,7 @@ import './index.css'
 
 const App = () => {
   const [contacts, setContacts] = useState(() => {
-    // Ilk basta localStorage'dan veriyi aliyoruz, yoksa varsayilan degeri kullaniyoruz.
+    // Ilk basta localStorage'dan veriyi al yoksa varsayilan degeri kullan
     const savedContacts = localStorage.getItem('contacts')
     return savedContacts
       ? JSON.parse(savedContacts)
@@ -19,17 +19,22 @@ const App = () => {
         ]
   })
 
+  // filter state'ini ekle
+  const [filter, setFilter] = useState('')
+
   useEffect(() => {
-    // contacts her degistiginde localStorage'a kaydediyoruz.
+    // contacts her degistiginde localStorage'a kaydet
     localStorage.setItem('contacts', JSON.stringify(contacts))
   }, [contacts])
 
   return (
     <div className="app">
       <h1>Contact Manager</h1>
-      <SearchBox />
+      <SearchBox setFilter={setFilter} />{' '}
+      {/* filter'ı SearchBox'a aktarıyoruz */}
       <ContactForm setContacts={setContacts} />
-      <ContactList contacts={contacts} />
+      <ContactList contacts={contacts} filter={filter} />{' '}
+      {/* filter'ı ContactList'e aktar*/}
     </div>
   )
 }
