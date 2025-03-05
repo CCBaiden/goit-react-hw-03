@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import ContactForm from './components/ContactForm/ContactForm'
 import ContactList from './components/ContactList/ContactList'
-import SearchBox from './components/SearchBox/SearchBox'
+import SearchBox from './components/SearchBox/SearchBox';
+import './components/SearchBox/SearchBox.module.css'; 
 import './index.css'
 
 const App = () => {
