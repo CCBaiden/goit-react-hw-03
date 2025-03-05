@@ -1,20 +1,23 @@
 import { useState } from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { nanoid } from 'nanoid'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 
-const ContactForm = ({ onAddContact }) => {
-  const [name, setName] = useState('')
-  const [number, setNumber] = useState('')
+const validationSchema = Yup.object({
+  name: Yup.string().min(3).max(50).required('Name is required'),
+  number: Yup.string().min(3).max(50).required('Number is required'),
+})
 
+const ContactForm = ({ setContacts }) => {
   const handleSubmit = (values, { resetForm }) => {
-    onAddContact({ ...values, id: `id-${Date.now()}` })
+    const newContact = {
+      id: nanoid(),
+      name: values.name,
+      number: values.number,
+    }
+    setContacts((prevContacts) => [...prevContacts, newContact])
     resetForm()
   }
-
-  const validationSchema = Yup.object({
-    name: Yup.string().min(3).max(50).required('Name is required'),
-    number: Yup.string().min(3).max(50).required('Number is required'),
-  })
 
   return (
     <Formik
@@ -23,14 +26,10 @@ const ContactForm = ({ onAddContact }) => {
       onSubmit={handleSubmit}
     >
       <Form>
-        <label htmlFor="name">Name</label>
-        <Field type="text" id="name" name="name" />
+        <Field name="name" type="text" placeholder="Name" />
         <ErrorMessage name="name" component="div" />
-
-        <label htmlFor="number">Number</label>
-        <Field type="text" id="number" name="number" />
+        <Field name="number" type="text" placeholder="Number" />
         <ErrorMessage name="number" component="div" />
-
         <button type="submit">Add Contact</button>
       </Form>
     </Formik>
