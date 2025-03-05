@@ -1,18 +1,10 @@
-const ContactItem = ({ contact }) => {
+const ContactItem = ({ contact, onDelete }) => {
   return (
     <li>
       <p>
         {contact.name}: {contact.number}
       </p>
-      <button
-        onClick={() => {
-          /* delete function */
-        }}
-      >
-        Delete
-      </button>
+      <button onClick={() => onDelete(contact.id)}>Delete</button>
     </li>
   )
 }
-
-export default ContactItem
