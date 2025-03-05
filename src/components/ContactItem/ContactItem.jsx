@@ -8,3 +8,5 @@ const ContactItem = ({ contact, onDelete }) => {
     </li>
   )
 }
+
+export default ContactItem;
