@@ -1,10 +1,16 @@
-import React from 'react'
-
 const ContactItem = ({ contact }) => {
   return (
     <li>
-      <p>{contact.name}</p>
-      <p>{contact.number}</p>
+      <p>
+        {contact.name}: {contact.number}
+      </p>
+      <button
+        onClick={() => {
+          /* delete function */
+        }}
+      >
+        Delete
+      </button>
     </li>
   )
 }
