@@ -6,7 +6,7 @@ const SearchBox = ({ filter, setFilter }) => {
       type="text"
       value={filter}
       onChange={(e) => setFilter(e.target.value)}
-      placeholder="Search by name"
+      placeholder="Find contacts by name"
     />
   )
 }
