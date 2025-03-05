@@ -1,14 +1,16 @@
-import { useState } from 'react'
 import { nanoid } from 'nanoid'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import styles from './ContactForm.module.css'
 
+// Form doğrulama
 const validationSchema = Yup.object({
   name: Yup.string().min(3).max(50).required('Name is required'),
   number: Yup.string().min(3).max(50).required('Number is required'),
 })
 
 const ContactForm = ({ setContacts }) => {
+  // Form verisi gonderildiginde
   const handleSubmit = (values, { resetForm }) => {
     const newContact = {
       id: nanoid(),
@@ -16,13 +18,10 @@ const ContactForm = ({ setContacts }) => {
       number: values.number,
     }
 
-    // Contacts listesini güncelle
+    // Yeni kisiyi ekle ve localstorage kaydet
     setContacts((prevContacts) => {
       const updatedContacts = [...prevContacts, newContact]
-
-      // Yeni contact'ı localStorage'a kaydet
       localStorage.setItem('contacts', JSON.stringify(updatedContacts))
-
       return updatedContacts
     })
 
@@ -30,19 +29,47 @@ const ContactForm = ({ setContacts }) => {
   }
 
   return (
-    <Formik
-      initialValues={{ name: '', number: '' }}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      <Form>
-        <Field name="name" type="text" placeholder="Name" />
-        <ErrorMessage name="name" component="div" />
-        <Field name="number" type="text" placeholder="Number" />
-        <ErrorMessage name="number" component="div" />
-        <button type="submit">Add Contact</button>
-      </Form>
-    </Formik>
+    <div className={styles.formContainer}>
+      <Formik
+        initialValues={{ name: '', number: '' }}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        <Form className={styles.form}>
+          <div className={styles.fieldContainer}>
+            <Field
+              className={styles.input}
+              name="name"
+              type="text"
+              placeholder="Name"
+            />
+            <ErrorMessage
+              name="name"
+              component="div"
+              className={styles.error}
+            />
+          </div>
+
+          <div className={styles.fieldContainer}>
+            <Field
+              className={styles.input}
+              name="number"
+              type="text"
+              placeholder="Number"
+            />
+            <ErrorMessage
+              name="number"
+              component="div"
+              className={styles.error}
+            />
+          </div>
+
+          <button className={styles.submitButton} type="submit">
+            Add Contact
+          </button>
+        </Form>
+      </Formik>
+    </div>
   )
 }
 
