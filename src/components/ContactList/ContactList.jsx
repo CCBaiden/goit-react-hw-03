@@ -17,7 +17,7 @@ const ContactList = ({ contacts, filter, setContacts }) => {
         <ContactItem
           key={contact.id}
           contact={contact}
-          onDelete={handleDelete} // onDelete fonksiyonunu
+          onDelete={handleDelete} // onDelete fonksiyonu
         />
       ))}
     </ul>
