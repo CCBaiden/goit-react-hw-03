@@ -6,8 +6,8 @@ import './components/SearchBox/SearchBox.module.css'
 import './index.css'
 
 const App = () => {
-  // localStorage'dan verileri alıyoruz, yoksa test verilerini kullanıyoruz
   const [contacts, setContacts] = useState(() => {
+    // Ilk basta localStorage'dan veriyi aliyoruz, yoksa varsayilan degeri kullaniyoruz.
     const savedContacts = localStorage.getItem('contacts')
     return savedContacts
       ? JSON.parse(savedContacts)
@@ -19,8 +19,8 @@ const App = () => {
         ]
   })
 
-  // contacts değiştiğinde veriyi localStorage'a kaydediyoruz
   useEffect(() => {
+    // contacts her degistiginde localStorage'a kaydediyoruz.
     localStorage.setItem('contacts', JSON.stringify(contacts))
   }, [contacts])
 
@@ -28,7 +28,7 @@ const App = () => {
     <div className="app">
       <h1>Contact Manager</h1>
       <SearchBox />
-      <ContactForm />
+      <ContactForm setContacts={setContacts} />
       <ContactList contacts={contacts} />
     </div>
   )

@@ -15,8 +15,18 @@ const ContactForm = ({ setContacts }) => {
       name: values.name,
       number: values.number,
     }
-    setContacts((prevContacts) => [...prevContacts, newContact])
-    resetForm()
+
+    // Contacts listesini güncelle
+    setContacts((prevContacts) => {
+      const updatedContacts = [...prevContacts, newContact]
+
+      // Yeni contact'ı localStorage'a kaydet
+      localStorage.setItem('contacts', JSON.stringify(updatedContacts))
+
+      return updatedContacts
+    })
+
+    resetForm() // Formu sıfırla
   }
 
   return (
