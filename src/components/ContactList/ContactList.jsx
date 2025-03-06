@@ -1,4 +1,5 @@
 import ContactItem from '../ContactItem/ContactItem'
+import styles from './ContactList.module.css'
 
 const ContactList = ({ contacts, filter, setContacts }) => {
   const filteredContacts = contacts.filter((contact) =>
@@ -12,12 +13,12 @@ const ContactList = ({ contacts, filter, setContacts }) => {
   }
 
   return (
-    <ul>
+    <ul className={styles.contactList}>
       {filteredContacts.map((contact) => (
         <ContactItem
           key={contact.id}
           contact={contact}
-          onDelete={handleDelete} // onDelete fonksiyonu
+          onDelete={handleDelete} //
         />
       ))}
     </ul>

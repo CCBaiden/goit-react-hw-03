@@ -1,0 +1,47 @@
+.errorMessage {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 0.25em; 
+}
+
+
+.formContainer {
+  border: 1px solid black;
+  padding: 16px;
+  border-radius: 4px;
+  width: 250px;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+}
+
+.fieldContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  padding: 8px;
+  border: 2px solid #bcbcbc;
+  border-radius: 4px;
+}
+
+.submitButton {
+  padding: 10px;
+  background-color: rgb(242, 239, 239);
+  width: 100px;
+  height: 30px;
+  color: black;
+  border: 1px solid gray;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; 
+}

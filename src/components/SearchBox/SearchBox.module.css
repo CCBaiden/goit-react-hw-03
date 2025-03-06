@@ -1,0 +1,17 @@
+.searchBoxContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.label {
+  margin-bottom: 5px;
+}
+
+.searchBox {
+  width: 265px;
+  height: 10px;
+  padding: 8px;
+  border: 2px solid #bcbcbc;
+  border-radius: 3px;
+}

@@ -3,14 +3,20 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import styles from './ContactForm.module.css'
 
-// Form doğrulama
+// Form dogrulama
 const validationSchema = Yup.object({
-  name: Yup.string().min(3).max(50).required('Name is required'),
-  number: Yup.string().min(3).max(50).required('Number is required'),
+  name: Yup.string()
+    .min(3, 'Name must be at least 3 characters')
+    .max(50, 'Name cannot exceed 50 characters')
+    .required('Required'),
+  number: Yup.string()
+    .min(3, 'Number must be at least 3 characters')
+    .max(50, 'Number cannot exceed 50 characters')
+    .required('Required'),
 })
 
 const ContactForm = ({ setContacts }) => {
-  // Form verisi gonderildiginde
+  // Form gonderildiginde
   const handleSubmit = (values, { resetForm }) => {
     const newContact = {
       id: nanoid(),
@@ -18,14 +24,14 @@ const ContactForm = ({ setContacts }) => {
       number: values.number,
     }
 
-    // Yeni kisiyi ekle ve localstorage kaydet
+    // Yeni kisi ekle 
     setContacts((prevContacts) => {
       const updatedContacts = [...prevContacts, newContact]
       localStorage.setItem('contacts', JSON.stringify(updatedContacts))
       return updatedContacts
     })
 
-    resetForm() // Formu sıfırla
+    resetForm() 
   }
 
   return (
@@ -37,30 +43,31 @@ const ContactForm = ({ setContacts }) => {
       >
         <Form className={styles.form}>
           <div className={styles.fieldContainer}>
-            <Field
-              className={styles.input}
-              name="name"
-              type="text"
-              placeholder="Name"
-            />
+            <label htmlFor="name" className={styles.label}>
+              Name
+            </label>
+            <Field className={styles.input} name="name" type="text" id="name" />
             <ErrorMessage
               name="name"
               component="div"
-              className={styles.error}
+              className={styles.errorMessage}
             />
           </div>
 
           <div className={styles.fieldContainer}>
+            <label htmlFor="number" className={styles.label}>
+              Number
+            </label>
             <Field
               className={styles.input}
               name="number"
               type="text"
-              placeholder="Number"
+              id="number"
             />
             <ErrorMessage
               name="number"
               component="div"
-              className={styles.error}
+              className={styles.errorMessage}
             />
           </div>
 
