@@ -1,7 +1,22 @@
-import { useEffect } from 'react'
+import { nanoid } from 'nanoid'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
+import styles from './ContactForm.module.css'
+
+// Form dogrulama
+const validationSchema = Yup.object({
+  name: Yup.string()
+    .min(3, 'Name must be at least 3 characters')
+    .max(50, 'Name cannot exceed 50 characters')
+    .required('Required'),
+  number: Yup.string()
+    .min(3, 'Number must be at least 3 characters')
+    .max(50, 'Number cannot exceed 50 characters')
+    .required('Required'),
+})
 
 const ContactForm = ({ setContacts }) => {
-  // Form gönderildiğinde
+  // Form gonderildiginde
   const handleSubmit = (values, { resetForm }) => {
     const newContact = {
       id: nanoid(),
@@ -9,22 +24,15 @@ const ContactForm = ({ setContacts }) => {
       number: values.number,
     }
 
-    // Yeni kişi ekle
+    // Yeni kisi ekle 
     setContacts((prevContacts) => {
       const updatedContacts = [...prevContacts, newContact]
       localStorage.setItem('contacts', JSON.stringify(updatedContacts))
       return updatedContacts
     })
 
-    resetForm()
+    resetForm() 
   }
-
-  useEffect(() => {
-    const savedContacts = localStorage.getItem('contacts')
-    if (savedContacts) {
-      setContacts(JSON.parse(savedContacts))
-    }
-  }, [setContacts])
 
   return (
     <div className={styles.formContainer}>
